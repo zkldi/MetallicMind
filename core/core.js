@@ -8,7 +8,7 @@ const ICPHooks = {
 }
 
 const COMMANDS = {
-    "ping": require("./commands/ping.js"),
+    "status": require("./commands/status.js"),
     "help": {
         desc: "Displays a list of commands, or information about a specific command.",
         args: [
