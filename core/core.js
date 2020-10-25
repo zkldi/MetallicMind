@@ -78,7 +78,7 @@ function HandleMessage(mind, msg) {
         let args = msg.content.substring(1).split(" ");
         let commandName = args[0];
 
-        if (commandName in COMMANDS){
+        if (COMMANDS.hasOwnProperty(commandName)){
             let command = COMMANDS[commandName];
 
             command.handler(mind, msg, args);
