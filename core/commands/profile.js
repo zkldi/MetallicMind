@@ -42,11 +42,11 @@ async function Profile(mind, msg, args){
 
                 let rtRank = await db.get("users").count({
                     [`ratings.${game}.${playtype}`]: {$gte: user.ratings[game][playtype]}
-                }) + 1;
+                });
 
                 let lmRank = await db.get("users").count({
                     [`lampRatings.${game}.${playtype}`]: {$gte: user.lampRatings[game][playtype]}
-                }) + 1;
+                });
 
                 let totalPlayers = await db.get("users").count({
                     [`ratings.${game}.${playtype}`]: {$gte: 0}
