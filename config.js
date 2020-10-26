@@ -1,9 +1,9 @@
 module.exports = {
     ver: {
-        title: "Bodysnatchers",
+        title: "Nude",
         major: 1,
-        minor: 1,
-        patch: 3,
+        minor: 2,
+        patch: 0,
         suffix: "a"
     },
     gameChannels: {

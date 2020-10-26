@@ -10,6 +10,10 @@ mind.on("ready", () => {
     console.log(`Running METALLIC MIND v${config.ver.major}.${config.ver.minor}.${config.ver.patch}${config.ver.suffix} (${config.ver.title})`);
     core.InitialiseICP(mind);
     console.log("==== BOOTUP FINISHED ====");
+
+    mind.channels.fetch("770373687048011787").then(c => {
+        c.send(`Deploy successful. Updated to v${config.ver.major}.${config.ver.minor}.${config.ver.patch}${config.ver.suffix} (${config.ver.title})!`);
+    })
 });
 
 mind.on("message", msg => {
