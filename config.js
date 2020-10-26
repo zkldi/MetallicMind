@@ -3,7 +3,7 @@ module.exports = {
         title: "Nude",
         major: 1,
         minor: 2,
-        patch: 0,
+        patch: 1,
         suffix: "a"
     },
     gameChannels: {
