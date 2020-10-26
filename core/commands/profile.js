@@ -108,5 +108,15 @@ module.exports = {
         required: false,
         val: ["id", "username"]
     }],
+    opts: [
+        {
+            name: "game",
+            desc: "Any supported game."
+        },
+        {
+            name: "playtype",
+            desc: "Any supported playtype for a given game."
+        }
+    ],
     handler: Profile
 }

@@ -3,7 +3,6 @@ const db = require("../db.js");
 const SECURE_USER_OPTS = {
     projection: {
         integrations: 0,
-        _id: 0,
         password: 0,
         email: 0
     }
@@ -36,7 +35,36 @@ async function GetRequestingUser(msg){
     return user;
 }
 
+async function GetRequestingUserAndSecureInfo(msg){
+    let user = await db.get("users").findOne({
+        "integrations.discord.discordID": msg.author.id
+    });
+
+    return user;
+}
+
+async function RequireLink(msg) {
+    let user = await GetRequestingUser(msg);
+    if (!user) {
+        msg.channel.send("You are not `!link`ed with Kamaitachi!");
+    }
+
+    return user;
+}
+
+async function RequireLinkAndSecureInfo(msg) {
+    let user = await GetRequestingUserAndSecureInfo(msg);
+    if (!user) {
+        msg.channel.send("You are not `!link`ed with Kamaitachi!");
+    }
+
+    return user;
+}
+
 module.exports = {
     GetUserFriendly,
-    GetRequestingUser
+    GetRequestingUser,
+    RequireLink,
+    RequireLinkAndSecureInfo,
+    GetRequestingUserAndSecureInfo
 }

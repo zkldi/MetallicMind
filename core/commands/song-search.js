@@ -1,0 +1,64 @@
+const fetch = require("node-fetch");
+const config = require("../../config.js");
+const userUtil = require("../../util/users.js");
+const Discord = require("discord.js");
+
+async function SongSearch(mind, msg, args, opts){
+    let user = await userUtil.RequireLinkAndSecureInfo(msg);
+    if (!user) {
+        return;
+    }
+
+    let query = args.slice(1).join(" ");
+
+    if (opts.game) {
+        query += "&game=" + opts.game;
+    }
+
+    let rj = await fetch("http://api.kamaitachi.xyz/v1/search?title=" + query, {
+        headers: {
+            Authorization: `Bearer ` + user.integrations["ktchi-api"].key
+        }
+    }).then(r => r.json());
+
+    if (!rj.success) {
+        msg.channel.send(rj.description);
+        return;
+    }
+
+    let fields = [];
+
+    for (const song of rj.body.slice(0, 10)) {
+        let field = {
+            name: `${song.artist} - ${song.title}`,
+            value: `[${config.gameHuman[song.game]}](https://kamaitachi.xyz/dashboard/games/${song.game}/songs/${song.id})`,
+            inline: true
+        }
+
+        fields.push(field);
+    }
+
+    let scoresEmbed = new Discord.MessageEmbed()
+        .setColor("#cc527a")
+        .setTitle(`Searched for ${query}`)
+        .addFields(fields)
+
+    msg.channel.send(scoresEmbed);
+}
+
+module.exports = {
+    desc: "Searches for a song.",
+    args: [
+        {
+            required: true,
+            val: ["title","artist","genre"]
+        }
+    ],
+    opts: [
+        {
+            name: "game",
+            desc: "Any supported game."
+        }
+    ],
+    handler: SongSearch
+}

@@ -24,5 +24,8 @@ module.exports = {
             val: "no-ktchi"
         }
     ],
+    opts: {
+        
+    },
     handler: Status
 }

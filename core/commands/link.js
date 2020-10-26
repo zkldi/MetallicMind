@@ -38,5 +38,6 @@ async function KtchiLink(mind, msg, args){
 module.exports = {
     desc: "Links your Discord account with Kamaitachi.",
     args: [],
+    opts: [],
     handler: KtchiLink
 }

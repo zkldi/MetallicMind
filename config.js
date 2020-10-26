@@ -44,5 +44,13 @@ module.exports = {
         bms: "BMS",
         chunithm: "CHUNITHM"
     },
+    formatDifficulty: function (chart, game) {
+        if (this.validPlaytypes[game].length === 1) {
+            return chart.difficulty;
+        }
+        else {
+            return chart.playtype + " " + chart.difficulty
+        }
+    },
     prefix: "!"
 }

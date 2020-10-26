@@ -2,6 +2,7 @@ const config = require("../config.js");
 const similarity = require("string-similarity");
 const discord = require("discord.js");
 const redisICP = require("../redisICP.js");
+const ArgParse = require("../util/arg-parse.js");
 
 const ICPHooks = {
     onAchievedGoal: require("./icp-hooks/achieved-goals.js")
@@ -11,6 +12,8 @@ const COMMANDS = {
     "status": require("./commands/status.js"),
     "link": require("./commands/link.js"),
     "profile": require("./commands/profile.js"),
+    "scquery": require("./commands/query.js"),
+    "search": require("./commands/song-search.js"),
     "help": {
         desc: "Displays a list of commands, or information about a specific command.",
         args: [
@@ -19,6 +22,7 @@ const COMMANDS = {
                 val: "command"
             }
         ],
+        opts: [],
         handler: HelpFunction
     }
 }
@@ -55,6 +59,13 @@ function HelpFunction(mind, msg, args) {
             let formattedArgs = FormatArguments(command.args);
 
             msg.channel.send(`\`${args[1]}\`: ${command.desc}\nSyntax: \`${config.prefix}${args[1]}${formattedArgs}\``);
+            if (command.opts.length) {
+                let optString = "";
+                for (const opt of command.opts) {
+                    optString += `\n\`${opt.name}\`: ${opt.desc}`;
+                }
+                msg.channel.send(`Options: ${optString}`)
+            }
         }
         else {
             msg.channel.send(`The function \`${args[1]}\` does not exist.`)
@@ -67,6 +78,7 @@ function HelpFunction(mind, msg, args) {
         }
 
         msg.channel.send(commandList);
+        msg.channel.send(`Invoke a command by typing \`${config.prefix}\` followed by the command name.\nAdd options using --name=value syntax.`);
     }
 }
 
@@ -77,13 +89,14 @@ function InitialiseICP(mind){
 
 function HandleMessage(mind, msg) {
     if (msg.content[0] === config.prefix) {
-        let args = msg.content.substring(1).split(" ");
-        let commandName = args[0];
+        let argsTemp = msg.content.substring(1).split(" ");
+        let commandName = argsTemp[0];
 
         if (COMMANDS.hasOwnProperty(commandName)){
             let command = COMMANDS[commandName];
 
-            command.handler(mind, msg, args);
+            let {args, opts} = ArgParse(argsTemp);
+            command.handler(mind, msg, args, opts);
         }
         else {
             HandleInvalidCommand(mind, msg, commandName);
