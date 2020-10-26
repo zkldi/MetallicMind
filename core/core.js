@@ -16,6 +16,7 @@ const COMMANDS = {
     "search": require("./commands/song-search.js"),
     "songinfo": require("./commands/song-info.js"),
     "chartinfo": require("./commands/chart-info.js"),
+    "sync": require("./commands/sync.js"),
     "help": {
         desc: "Displays a list of commands, or information about a specific command.",
         args: [

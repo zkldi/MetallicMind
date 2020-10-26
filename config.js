@@ -1,9 +1,9 @@
 module.exports = {
     ver: {
-        title: "Nude",
+        title: "Weird Fishes / Arpeggi",
         major: 1,
-        minor: 2,
-        patch: 2,
+        minor: 3,
+        patch: 0,
         suffix: "a"
     },
     gameChannels: {
@@ -55,6 +55,11 @@ module.exports = {
         popn: "pop'n music",
         bms: "BMS",
         chunithm: "CHUNITHM"
+    },
+    serviceSupportedGames: { // only used for sync.
+        ARC: ["iidx","jubeat","sdvx","ddr"],
+        FLO: ["iidx"],
+        EAG: ["iidx"],
     },
     formatDifficulty: function (chart, game) {
         if (this.validPlaytypes[game].length === 1) {
