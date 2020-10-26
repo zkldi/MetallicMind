@@ -13,7 +13,7 @@ mind.on("ready", () => {
 
     let baseChannel = "770373687048011787"; // Kamaitachi #bot;
     if (process.env.NODE_ENV === "dev") {
-        baseChannel = "769803764021592104" // zkldi test server
+        baseChannel = "769803764021592107" // zkldi test server
     }
 
     mind.channels.fetch(baseChannel).then(c => {
