@@ -92,22 +92,31 @@ async function SongInfo(mind, msg, args, opts){
             isScorePB: true
         });
 
-        if (!reqPB.isLampPB) {
-            let lampPB = await db.get("scores").findOne({
-                chartID: chart.chartID,
-                userID: user.id,
-                isLampPB: true
-            });
+        if (reqPB) {
+            if (!reqPB.isLampPB) {
+                let lampPB = await db.get("scores").findOne({
+                    chartID: chart.chartID,
+                    userID: user.id,
+                    isLampPB: true
+                });
+        
+                reqPB.scoreData.lamp = lampPB.scoreData.lamp;
+                reqPB.scoreData.lampIndex = lampPB.scoreData.lampIndex;
+            }
     
-            reqPB.scoreData.lamp = lampPB.scoreData.lamp;
-            reqPB.scoreData.lampIndex = lampPB.scoreData.lampIndex;
+            fields.push({
+                name: `${requestedUser.displayname}'s PB`,
+                value: `[${requestedUser.displayname} (@${requestedUser.username})](https://kamaitachi.xyz/dashboard/users/${requestedUser.id}/games/${reqPB.game}?playtype=${chart.playtype})\n[${FormatScore(reqPB)}](https://kamaitachi.xyz/dashboard/scores/${reqPB.scoreID})`,
+                inline: true
+            });
         }
-
-        fields.push({
-            name: `${requestedUser.displayname}'s PB`,
-            value: `[${requestedUser.displayname} (@${requestedUser.username})](https://kamaitachi.xyz/dashboard/users/${requestedUser.id}/games/${reqPB.game}?playtype=${chart.playtype})\n[${FormatScore(reqPB)}](https://kamaitachi.xyz/dashboard/scores/${reqPB.scoreID})`,
-            inline: true
-        });
+        else {
+            fields.push({
+                name: `${requestedUser.displayname}'s PB`,
+                value: `Not played.`,
+                inline: true
+            });
+        }
     }
 
     let srField = {
