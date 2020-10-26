@@ -31,7 +31,8 @@ async function Profile(mind, msg, args){
 
             for (const playtype of config.validPlaytypes[game]) {
                 let field = {
-                    name: `${config.gameHuman[game]} (${playtype})`
+                    name: `${config.gameHuman[game]} (${playtype})`,
+                    inline: true
                 };
                 let val = "";
 
