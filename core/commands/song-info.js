@@ -18,7 +18,12 @@ async function SongInfo(mind, msg, args, opts){
         value: song.genre
     }];
 
-    if (song["alt-titles"].length) {
+    if (!song) {
+        msg.channel.send("Could not find songs/charts!");
+        return;
+    }
+
+    if (song["alt-titles"] && song["alt-titles"].length) {
         fields.push({
             name: "AKA",
             value: song["alt-titles"].join(", ")
