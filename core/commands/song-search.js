@@ -15,6 +15,10 @@ async function SongSearch(mind, msg, args, opts){
         query += "&game=" + opts.game;
     }
 
+    if (opts.exact || opts.exact === ""){
+        query += "&exact=true";
+    }
+
     let rj = await fetch("http://api.kamaitachi.xyz/v1/search?title=" + query, {
         headers: {
             Authorization: `Bearer ` + user.integrations["ktchi-api"].key
@@ -59,7 +63,7 @@ async function SongSearch(mind, msg, args, opts){
 
     let scoresEmbed = new Discord.MessageEmbed()
         .setColor("#cc527a")
-        .setTitle(`Searched for ${query}`)
+        .setTitle(`Searched for ${decodeURIComponent(query)}`)
         .addFields(fields)
 
     msg.channel.send(scoresEmbed);
@@ -77,6 +81,10 @@ module.exports = {
         {
             name: "game",
             desc: "Any supported game."
+        },
+        {
+            name: "exact",
+            desc: "Forces Kamaitachi to make an exact match of the title."
         }
     ],
     handler: SongSearch

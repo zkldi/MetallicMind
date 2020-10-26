@@ -3,7 +3,7 @@ module.exports = {
         title: "Bodysnatchers",
         major: 1,
         minor: 1,
-        patch: 2,
+        patch: 3,
         suffix: "a"
     },
     gameChannels: {
