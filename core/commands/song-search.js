@@ -15,7 +15,7 @@ async function SongSearch(mind, msg, args, opts){
         query += "&game=" + opts.game;
     }
 
-    if (opts.exact || opts.exact === ""){
+    if ("exact" in opts){
         query += "&exact=true";
     }
 

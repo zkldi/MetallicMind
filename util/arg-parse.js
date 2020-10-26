@@ -15,6 +15,8 @@ function ParseArgs(args) {
             i--; // hack? lol
         }
     }
+    
+    console.log(opts);
 
     return {args, opts};
 }
