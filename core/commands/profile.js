@@ -49,7 +49,7 @@ async function Profile(mind, msg, args){
                 }) + 1;
 
                 let totalPlayers = await db.get("users").count({
-                    [`ratings.${game}.${playtype}`]: {$gt: 0}
+                    [`ratings.${game}.${playtype}`]: {$gte: 0}
                 });
 
                 val = `Rating: ${user.ratings[game][playtype].toFixed(2)} (#${rtRank}/${totalPlayers})\nLamp Rating: ${user.lampRatings[game][playtype].toFixed(2)} (#${lmRank}/${totalPlayers})`
