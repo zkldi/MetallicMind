@@ -14,6 +14,8 @@ const COMMANDS = {
     "profile": require("./commands/profile.js"),
     "scquery": require("./commands/query.js"),
     "search": require("./commands/song-search.js"),
+    "songinfo": require("./commands/song-info.js"),
+    "chartinfo": require("./commands/chart-info.js"),
     "help": {
         desc: "Displays a list of commands, or information about a specific command.",
         args: [

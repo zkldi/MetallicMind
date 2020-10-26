@@ -31,6 +31,18 @@ module.exports = {
         chunithm: ["Single"],
         gitadora: ["Gita", "Dora"]
     },
+    validDifficulties: {
+        iidx: ["BEGINNER", "NORMAL", "HYPER", "ANOTHER", "LEGGENDARIA"],
+        museca: ["Green", "Yellow", "Red"],
+        maimai: ["Easy", "Basic", "Advanced", "Expert", "Master", "Re:Master"],
+        jubeat: ["BSC","ADV","EXT"],
+        popn: ["Easy", "Normal", "Hyper", "EX"],
+        sdvx: ["NOV", "ADV", "EXH", "MXM", "INF", "GRV", "HVN", "VVD"],
+        ddr: ["BEGINNER", "BASIC", "DIFFICULT", "EXPERT", "CHALLENGE"],
+        bms: ["BEGINNER", "NORMAL", "HYPER", "ANOTHER", "CUSTOM"],
+        chunithm: ["BASIC", "ADVANCED", "EXPERT", "MASTER", "WORLD'S END"],
+        gitadora: ["BASIC", "ADVANCED", "EXTREME", "MASTER", "BASS BASIC", "BASS ADVANCED", "BASS EXTREME", "BASS MASTER"]
+    },
     gameHuman: {
         iidx: "beatmania IIDX",
         museca: "MÚSECA",

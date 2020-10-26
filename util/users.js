@@ -61,10 +61,19 @@ async function RequireLinkAndSecureInfo(msg) {
     return user;
 }
 
+async function GetUserWithID(id) {
+    let user = await db.get("users").findOne({
+        id: id
+    }, SECURE_USER_OPTS);
+
+    return user;
+}
+
 module.exports = {
     GetUserFriendly,
     GetRequestingUser,
     RequireLink,
     RequireLinkAndSecureInfo,
-    GetRequestingUserAndSecureInfo
+    GetRequestingUserAndSecureInfo,
+    GetUserWithID
 }
