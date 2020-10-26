@@ -43,7 +43,7 @@ async function SyncScores(mind, msg, args){
     })
 
     msg.channel.send(`Firing import request...`);
-    let importRes = await fetch("http://127.0.0.1:8080/dashboard/data/import", {
+    let importRes = await fetch("https://kamaitachi.xyz/dashboard/data/import", {
         method: "PATCH",
         body: JSON.stringify({
             serviceLoc: args[1],
