@@ -9,6 +9,8 @@ const ICPHooks = {
 
 const COMMANDS = {
     "status": require("./commands/status.js"),
+    "link": require("./commands/link.js"),
+    "profile": require("./commands/profile.js"),
     "help": {
         desc: "Displays a list of commands, or information about a specific command.",
         args: [

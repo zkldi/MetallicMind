@@ -23,4 +23,9 @@ mind.on("message", msg => {
     }
 });
 
-mind.login(secrets.token);
+if (process.env.NODE_ENV === "dev"){
+    mind.login(secrets.testingToken);
+}
+else {
+    mind.login(secrets.token);
+}

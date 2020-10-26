@@ -1,8 +1,8 @@
 module.exports = {
     ver: {
-        title: "15 Step",
+        title: "Bodysnatchers",
         major: 1,
-        minor: 0,
+        minor: 1,
         patch: 0,
         suffix: "a"
     },
@@ -17,6 +17,32 @@ module.exports = {
         "chunithm": "768579004788637756",
         "jubeat": "687614313514795119",
         "gitadora": "768579058460000337"
+    },
+    supportedGames: ["iidx","museca","maimai","jubeat","popn","sdvx","ddr","bms","chunithm","gitadora"],
+    validPlaytypes: {
+        iidx: ["SP","DP"],
+        popn: ["9B"],
+        sdvx: ["Single"],
+        ddr: ["SP","DP"],
+        maimai: ["Single"],
+        jubeat: ["Single"],
+        museca: ["Single"],
+        bms: ["7K","14K","5K","10K"],
+        chunithm: ["Single"],
+        gitadora: ["Gita", "Dora"]
+    },
+    gameHuman: {
+        iidx: "beatmania IIDX",
+        museca: "MÚSECA",
+        maimai: "maimai",
+        sdvx: "SOUND VOLTEX",
+        ddr: "Dance Dance Revolution",
+        gitadora: "GITADORA",
+        gfdm: "GuitarFreaks & DrumMania",
+        jubeat: "jubeat",
+        popn: "pop'n music",
+        bms: "BMS",
+        chunithm: "CHUNITHM"
     },
     prefix: "!"
 }
