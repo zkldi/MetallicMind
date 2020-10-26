@@ -9,7 +9,8 @@ async function SongSearch(mind, msg, args, opts){
         return;
     }
 
-    let query = encodeURIComponent(args.slice(1).join(" "));
+    let rawQuery = encodeURIComponent(args.slice(1).join(" "));
+    let query = rawQuery;
 
     if (opts.game) {
         query += "&game=" + opts.game;
@@ -63,7 +64,7 @@ async function SongSearch(mind, msg, args, opts){
 
     let scoresEmbed = new Discord.MessageEmbed()
         .setColor("#cc527a")
-        .setTitle(`Searched for ${decodeURIComponent(query)}`)
+        .setTitle(`Searched for ${decodeURIComponent(rawQuery)}`)
         .addFields(fields)
 
     msg.channel.send(scoresEmbed);
