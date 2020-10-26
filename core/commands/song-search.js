@@ -9,7 +9,7 @@ async function SongSearch(mind, msg, args, opts){
         return;
     }
 
-    let query = args.slice(1).join(" ");
+    let query = encodeURIComponent(args.slice(1).join(" "));
 
     if (opts.game) {
         query += "&game=" + opts.game;
