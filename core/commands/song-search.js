@@ -38,6 +38,25 @@ async function SongSearch(mind, msg, args, opts){
         fields.push(field);
     }
 
+    if (!fields.length){
+        fields = [{
+            name: "No results found.",
+            value: ":("
+        }]
+    }
+    else if (fields.length === 10) {
+        fields.push({
+            name: "More Results",
+            value: `[View](https://kamaitachi.xyz/dashboard/search?query=${query})`
+        });
+    }
+    else {
+        fields.push({
+            name: "View on site",
+            value: `[View](https://kamaitachi.xyz/dashboard/search?query=${query})`
+        })
+    }
+
     let scoresEmbed = new Discord.MessageEmbed()
         .setColor("#cc527a")
         .setTitle(`Searched for ${query}`)
