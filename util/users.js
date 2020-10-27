@@ -21,8 +21,15 @@ async function GetUserFriendly(id){
     }
     else {
         user = await db.get("users").findOne({
-            username: new RegExp(`${regexSanitise(id)}`, "i")
+            username: new RegExp(`^${regexSanitise(id)}$`, "i")
         }, SECURE_USER_OPTS)
+
+        // try again, but more leniently
+        if (!user) {
+            user = await db.get("users").findOne({
+                username: new RegExp(`${regexSanitise(id)}`, "i")
+            }, SECURE_USER_OPTS)
+        }
     }
 
     return user;
