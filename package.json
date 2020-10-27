@@ -18,6 +18,7 @@
   "homepage": "https://github.com/zkldi/MetallicMind#readme",
   "dependencies": {
     "discord.js": "^12.4.1",
+    "escape-string-regexp": "^4.0.0",
     "monk": "^7.3.2",
     "node-fetch": "^2.6.1",
     "redis": "^3.0.2",

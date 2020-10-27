@@ -1,4 +1,5 @@
 const db = require("../db.js");
+const regexSanitise = require("escape-string-regexp");
 
 const SECURE_USER_OPTS = {
     projection: {
@@ -20,7 +21,7 @@ async function GetUserFriendly(id){
     }
     else {
         user = await db.get("users").findOne({
-            username: id
+            username: new RegExp(`${regexSanitise(id)}`, "i")
         }, SECURE_USER_OPTS)
     }
 
