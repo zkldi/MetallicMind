@@ -3,7 +3,7 @@ module.exports = {
         title: "Weird Fishes / Arpeggi",
         major: 1,
         minor: 3,
-        patch: 0,
+        patch: 1,
         suffix: "a"
     },
     gameChannels: {
