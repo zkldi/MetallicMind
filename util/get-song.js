@@ -20,7 +20,7 @@ async function GetSongHuman(user, msg, args, opts) {
 
     if (!rj.success) {
         msg.channel.send(rj.description);
-        return;
+        return null;
     }
 
     if (!rj.body[0]){

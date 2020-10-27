@@ -5,7 +5,7 @@ async function GetChart(user, msg, args, opts) {
     let song = await GetSong(user, msg, args, opts);
 
     if (!song) {
-        return;
+        return {song: null, charts: null};
     }
 
     let chartQueryObj = {
