@@ -30,7 +30,7 @@ async function OnAchievedGoal(mind, goals) {
 
     let fields = [];
     for (const goal of goals.goalsAchieved) {
-        fields.push({ name: goal.title , value: `${goal.previousProgHuman} => ${goal.progressHuman}` });
+        fields.push({ name: goal.title , value: `${goal.previousProgHuman} => ${goal.updateObj.progressHuman}` });
     }
     
     let pfpLink = `https://kamaitachi.xyz/static/images/users/${user.custompfp ? `${user.id}-pfp.png` : `0default-pfp.png`}`;
