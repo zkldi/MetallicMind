@@ -57,7 +57,7 @@ function FormatArguments(args) {
 // HelpFunction is defined here and not in a separate file as it requires knowledge of COMMANDS to run.
 function HelpFunction(mind, msg, args) {
     if (args[1]) {
-        if (args[1] in COMMANDS) {
+        if (args[1] in COMMANDS && !COMMANDS[args[1]].secret) {
             let command = COMMANDS[args[1]];
             let formattedArgs = FormatArguments(command.args);
 
