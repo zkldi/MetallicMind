@@ -17,6 +17,7 @@ const COMMANDS = {
     "songinfo": require("./commands/song-info.js"),
     "chartinfo": require("./commands/chart-info.js"),
     "sync": require("./commands/sync.js"),
+    "thank": require("./commands/thank.js"),
     "help": {
         desc: "Displays a list of commands, or information about a specific command.",
         args: [
@@ -57,7 +58,7 @@ function FormatArguments(args) {
 // HelpFunction is defined here and not in a separate file as it requires knowledge of COMMANDS to run.
 function HelpFunction(mind, msg, args) {
     if (args[1]) {
-        if (args[1] in COMMANDS && !COMMANDS[args[1]].secret) {
+        if (args[1] in COMMANDS) {
             let command = COMMANDS[args[1]];
             let formattedArgs = FormatArguments(command.args);
 
@@ -77,7 +78,9 @@ function HelpFunction(mind, msg, args) {
     else {
         let commandList = "";
         for (const command in COMMANDS) {
-            commandList += `\`${command}\`: ${COMMANDS[command].desc}\n`;
+            if (!command.secret) {
+                commandList += `\`${command}\`: ${COMMANDS[command].desc}\n`;
+            }
         }
 
         msg.channel.send(commandList);
