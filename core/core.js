@@ -78,7 +78,7 @@ function HelpFunction(mind, msg, args) {
     else {
         let commandList = "";
         for (const command in COMMANDS) {
-            if (!command.secret) {
+            if (!COMMANDS[command].secret) {
                 commandList += `\`${command}\`: ${COMMANDS[command].desc}\n`;
             }
         }
