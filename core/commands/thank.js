@@ -1,3 +1,5 @@
+const db = require("../../db.js");
+
 const thankMsgs = [
     "Thank you too",
     "No problem",
@@ -22,7 +24,7 @@ const thankMsgs = [
 
 async function Thank(mind, msg, args){
     let thanked = await db.get("metallic-mind-thanks").findOne({
-        id: msg.author
+        id: msg.author.id
     });
 
     if (thanked) {
@@ -36,7 +38,7 @@ async function Thank(mind, msg, args){
         msg.channel.send(`${thankMsg}!\nI have been thanked ${thankedTimes} times.`);
 
         await db.get("metallic-mind-thanks").insert({
-            id: msg.author
+            id: msg.author.id
         });
     }
 }
