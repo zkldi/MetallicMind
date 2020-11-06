@@ -13,17 +13,26 @@ async function SyncScores(mind, msg, args){
 
     if (!args[1]){
         msg.channel.send("No service provided!");
+        return;
     }
 
     args[1] = args[1].toUpperCase();
 
-    if (!["FLO","EAG"].includes(args[1])){
-        msg.channel.send(`${args[1]} is not a supported service.`);
+    if (args[1] === "ANTHEM") {
+        msg.channel.send("Very funny.");
         return;
     }
 
     if (!args[2]){
         msg.channel.send(`No game provided!`);
+        return;
+    }
+
+
+    args[2] = args[2].toLowerCase();
+
+    if (!["FLO","EAG","ARC"].includes(args[1])){
+        msg.channel.send(`${args[1]} is not a supported service.`);
         return;
     }
 
@@ -40,16 +49,38 @@ async function SyncScores(mind, msg, args){
         expiryTime: Date.now() + (1000 * 60 * 5), // 5 mins
         createdOn: Date.now(),
         createdBy: "mmind",
-    })
+    });
+
+    let body = {
+        serviceLoc: args[1],
+        gameLoc: args[2],
+        apikey: apikey
+    };
+
+    if (args[1] === "ARC") {
+       
+        let accs = user.integrations.arc && user.integrations.arc.accounts;
+
+        if (!accs || !accs.length) {
+            msg.channel.send("You have no ARC accounts linked!");
+            return;
+        }
+
+        let filteredData = user.integrations.arc.accounts.filter(e => e.game === args[2]).sort((a,b) => parseInt(b.ver) - parseInt(a.ver));
+
+        if (!filteredData[0]) {
+            msg.channel.send("Could not find any appropriate ARC accounts to sync with!");
+            return;
+        }
+
+        body.apiAccount = filteredData[0].accountID;
+        msg.channel.send(`Attempting sync with ${filteredData[0].name}.`);
+    }
 
     msg.channel.send(`Firing import request...`);
     let importRes = await fetch("https://kamaitachi.xyz/dashboard/data/import", {
         method: "PATCH",
-        body: JSON.stringify({
-            serviceLoc: args[1],
-            gameLoc: args[2],
-            apikey: apikey
-        }),
+        body: JSON.stringify(body),
         headers: {
             "Content-Type": "application/json"
         }
@@ -81,7 +112,7 @@ module.exports = {
     args: [
         {
             required: true,
-            val: ["FLO","EAG"]
+            val: ["FLO","EAG","ARC"]
         },
         {
             required: true,

@@ -1,9 +1,9 @@
 module.exports = {
     ver: {
-        title: "Weird Fishes / Arpeggi",
+        title: "All I Need",
         major: 1,
-        minor: 3,
-        patch: 2,
+        minor: 4,
+        patch: 0,
         suffix: "a"
     },
     gameChannels: {
