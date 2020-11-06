@@ -90,8 +90,7 @@ async function SyncScores(mind, msg, args){
         let rj = await importRes.json();
 
         if (rj.success) {
-            msg.channel.send(`Successfully imported ${rj.body.successfulScoreCount} Score(s).\nGenerated ${rj.body.sessionInfo ? rj.body.sessionInfo.length : 0} new sessions.
-            Link: https://kamaitachi.xyz/dashboard/imports/view/${rj.body.importID}
+            msg.channel.send(`Successfully imported ${rj.body.successfulScoreCount} Score(s).\nGenerated ${rj.body.sessionInfo ? rj.body.sessionInfo.length : 0} new sessions.\nLink: https://kamaitachi.xyz/dashboard/imports/view/${rj.body.importID}
             `);
         }
         else {
