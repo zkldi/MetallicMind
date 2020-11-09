@@ -8,6 +8,7 @@ async function SyncScores(mind, msg, args){
     let user = await userUtil.GetRequestingUserAndSecureInfo(msg);
 
     if (!user) {
+        msg.channel.send("You need to `!link` your account first!");
         return;
     }
 
@@ -58,7 +59,6 @@ async function SyncScores(mind, msg, args){
     };
 
     if (args[1] === "ARC") {
-       
         let accs = user.integrations.arc && user.integrations.arc.accounts;
 
         if (!accs || !accs.length) {
