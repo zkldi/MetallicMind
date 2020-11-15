@@ -90,8 +90,20 @@ async function SyncScores(mind, msg, args){
         let rj = await importRes.json();
 
         if (rj.success) {
-            msg.channel.send(`Successfully imported ${rj.body.successfulScoreCount} Score(s).\nGenerated ${rj.body.sessionInfo ? rj.body.sessionInfo.length : 0} new sessions.\nLink: https://kamaitachi.xyz/dashboard/imports/view/${rj.body.importID}
+            msg.channel.send(`Successfully imported ${rj.body.successfulScoreCount} Score(s).\nGenerated ${rj.body.sessionInfo ? rj.body.sessionInfo.length : 0} new sessions.\nLink: https://kamaitachi.xyz/dashboard/imports/view/${rj.body.importID}\n
             `);
+
+            if (rj.body.sessionInfo.length && rj.body.sessionInfo.length <= 3) {
+                let sArr = ["Remember to name your sessions!"];
+
+                let i = 0;
+                for (const s of rj.body.sessionInfo) {
+                    i++;
+                    sArr.push(`Session #${i}: https://kamaitachi.xyz/dashboard/sessions/view/${s}`);
+                }
+
+                msg.channel.send(sArr.join("\n"));
+            }
         }
         else {
             msg.channel.send(rj.description);

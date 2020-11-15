@@ -3,8 +3,8 @@ module.exports = {
         title: "All I Need",
         major: 1,
         minor: 4,
-        patch: 1,
-        suffix: "a"
+        patch: 2,
+        suffix: ""
     },
     gameChannels: {
         "iidx": "687614242089730059",
