@@ -18,6 +18,7 @@ const COMMANDS = {
     "chartinfo": require("./commands/chart-info.js"),
     "sync": require("./commands/sync.js"),
     "thank": require("./commands/thank.js"),
+    "damnit-jag": require("./commands/damnitjag.js"),
     "help": {
         desc: "Displays a list of commands, or information about a specific command.",
         args: [
