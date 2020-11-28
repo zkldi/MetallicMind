@@ -3,7 +3,7 @@ module.exports = {
         title: "All I Need",
         major: 1,
         minor: 4,
-        patch: 3,
+        patch: 4,
         suffix: ""
     },
     gameChannels: {

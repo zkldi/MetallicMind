@@ -1,5 +1,6 @@
 const GetSong = require("./get-song.js");
 const db = require("../db.js");
+const config = require("../config.js");
 
 async function GetChart(user, msg, args, opts) {
     let song = await GetSong(user, msg, args, opts);
@@ -13,7 +14,12 @@ async function GetChart(user, msg, args, opts) {
     };
 
     if (opts.playtype) {
-        chartQueryObj.playtype = opts.playtype;
+        for (const playtype of config.validPlaytypes[song.game]) {
+            if (opts.playtype.match(new RegExp(`^${playtype}$`, "i"))) {
+                chartQueryObj.playtype = opts.playtype;
+                break;
+            }
+        }
     }
 
     if (opts.difficulty) {

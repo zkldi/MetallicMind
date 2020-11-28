@@ -6,7 +6,7 @@ const GetChartsHuman = require("../../util/get-charts.js");
 const FormatScore = require("../../util/format-score.js");
 const db = require("../../db.js");
 
-async function SongInfo(mind, msg, args, opts){
+async function ChartInfo(mind, msg, args, opts){
     let user = await userUtil.RequireLinkAndSecureInfo(msg);
     if (!user) {
         return;
@@ -202,5 +202,5 @@ module.exports = {
             desc: "Displays information about a given user on the chart."
         }
     ],
-    handler: SongInfo
+    handler: ChartInfo
 }
