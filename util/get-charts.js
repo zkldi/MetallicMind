@@ -10,22 +10,23 @@ async function GetChart(user, msg, args, opts) {
     }
 
     let chartQueryObj = {
+
         id: song.id
     };
 
     if (opts.playtype) {
         for (const playtype of config.validPlaytypes[song.game]) {
             if (opts.playtype.match(new RegExp(`^${playtype}$`, "i"))) {
-                chartQueryObj.playtype = opts.playtype;
+                chartQueryObj.playtype = playtype;
                 break;
-            }
+            }   
         }
     }
 
     if (opts.difficulty) {
         for (const difficulty of config.validDifficulties[song.game]) {
             if (opts.difficulty.match(new RegExp(`^${difficulty}$`, "i"))) {
-                chartQueryObj.difficulty = opts.difficulty;
+                chartQueryObj.difficulty = difficulty;
                 break;
             }
         }
