@@ -23,7 +23,12 @@ async function GetChart(user, msg, args, opts) {
     }
 
     if (opts.difficulty) {
-        chartQueryObj.difficulty = opts.difficulty;
+        for (const difficulty of config.validDifficulties[song.game]) {
+            if (opts.difficulty.match(new RegExp(`^${difficulty}$`, "i"))) {
+                chartQueryObj.difficulty = opts.difficulty;
+                break;
+            }
+        }
     }
 
     let charts = await db.get(`charts-${song.game}`).find(chartQueryObj);
