@@ -1,10 +1,7 @@
 const GetSong = require("./get-song.js");
 const db = require("../db.js");
 const config = require("../config.js");
-<<<<<<< HEAD
-=======
 const LooseMatch = require("./loose-match.js");
->>>>>>> staging
 
 async function GetChart(user, msg, args, opts) {
     let song = await GetSong(user, msg, args, opts);
