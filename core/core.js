@@ -18,6 +18,8 @@ const COMMANDS = {
     "chartinfo": require("./commands/chart-info.js"),
     "sync": require("./commands/sync.js"),
     "thank": require("./commands/thank.js"),
+    "damnitjag": require("./commands/damnit-jag.js"),
+    "lastsession": require("./commands/last-session.js"),
     "help": {
         desc: "Displays a list of commands, or information about a specific command.",
         args: [

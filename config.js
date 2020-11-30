@@ -1,10 +1,10 @@
 module.exports = {
     ver: {
-        title: "All I Need",
+        title: "Faust Arp",
         major: 1,
-        minor: 4,
-        patch: 1,
-        suffix: "a"
+        minor: 5,
+        patch: 0,
+        suffix: ""
     },
     gameChannels: {
         "iidx": "687614242089730059",
