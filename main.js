@@ -5,6 +5,7 @@ const mind = new Discord.Client();
 const core = require("./core/core.js");
 const redisICP = require("./redisICP.js");
 
+
 mind.on("ready", () => {
     console.log("==== BOOTUP ====");
     console.log(`Running METALLIC MIND v${config.ver.major}.${config.ver.minor}.${config.ver.patch}${config.ver.suffix} (${config.ver.title})`);
@@ -12,8 +13,10 @@ mind.on("ready", () => {
     console.log("==== BOOTUP FINISHED ====");
 
     let baseChannel = "770373687048011787"; // Kamaitachi #bot;
+    global.BASE_URL = "https://kamaitachi.xyz";
     if (process.env.NODE_ENV === "dev") {
         baseChannel = "769803764021592107" // zkldi test server
+        global.BASE_URL = "http://127.0.0.1:8080";
     }
 
     mind.channels.fetch(baseChannel).then(c => {
