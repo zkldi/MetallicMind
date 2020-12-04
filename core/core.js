@@ -5,7 +5,8 @@ const redisICP = require("../redisICP.js");
 const ArgParse = require("../util/arg-parse.js");
 
 const ICPHooks = {
-    onAchievedGoal: require("./icp-hooks/achieved-goals.js")
+    onAchievedGoal: require("./icp-hooks/achieved-goals.js"),
+    onClassUpdate: require("./icp-hooks/class-update.js"),
 }
 
 const COMMANDS = {
@@ -93,6 +94,7 @@ function HelpFunction(mind, msg, args) {
 function InitialiseICP(mind){
     // now mount our own redis listeners for stuff.
     redisICP.sub("achieved-goals", (goal) => ICPHooks.onAchievedGoal(mind, goal));
+    redisICP.sub("class-update", (classData) => ICPHooks.onClassUpdate(mind, classData));
 }
 
 function HandleMessage(mind, msg) {
