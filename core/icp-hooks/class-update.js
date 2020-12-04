@@ -20,7 +20,7 @@ const Discord = require("discord.js");
 async function OnClassUpdate(mind, classData) {
     let channelID = config.gameChannels[classData.game];
     if (!channelID) {
-        console.error(`No channel found for game ${goals.game}?`);
+        console.error(`No channel found for game ${classData.game}?`);
         return;
     }
 
@@ -45,7 +45,7 @@ async function OnClassUpdate(mind, classData) {
         .setAuthor(
             `${user.displayname} (@${user.username})`,
             pfpLink,
-            `https://kamaitachi.xyz/dashboard/profiles/${user.id}/games/${goals.game}?playtype=${goals.playtype}`
+            `https://kamaitachi.xyz/dashboard/profiles/${user.id}/games/${classData.game}?playtype=${classData.playtype}`
         )
         .setThumbnail(pfpLink)
         .setTimestamp()
