@@ -3,13 +3,22 @@ const db = require("../../db.js");
 const Discord = require("discord.js");
 
 // we're expecting data that looks like
-// userID, game, playtype,
-// goalsAchieved: [
-//    {goalID, goalTitle, updateObj}
-// ]
+/*
+    {
+        game,
+        service,
+        playtype,
+        from,
+        to,
+        fromHuman,
+        toHuman,
+        timestamp,
+        userID
+    }
+ */
 
-async function OnAchievedGoal(mind, goals) {
-    let channelID = config.gameChannels[goals.game];
+async function OnClassUpdate(mind, classData) {
+    let channelID = config.gameChannels[classData.game];
     if (!channelID) {
         console.error(`No channel found for game ${goals.game}?`);
         return;
@@ -18,7 +27,7 @@ async function OnAchievedGoal(mind, goals) {
     let channel = await mind.channels.fetch(channelID);
     
     let user = await db.get("users").findOne({
-        id: goals.userID
+        id: classData.userID
     }, {
         projection: {
             displayname: 1,
@@ -28,26 +37,20 @@ async function OnAchievedGoal(mind, goals) {
         }
     });
 
-    let fields = [];
-    for (const goal of goals.goalsAchieved) {
-        fields.push({ name: goal.title , value: `${goal.previousProgHuman} => ${goal.updateObj.progressHuman}` });
-    }
-    
     let pfpLink = `https://kamaitachi.xyz/static/images/users/${user.custompfp ? `${user.id}-pfp.png` : `0default-pfp.png`}`;
 
-    let goalsEmbed = new Discord.MessageEmbed()
+    let classEmbed = new Discord.MessageEmbed()
         .setColor("#cc527a")
-        .setTitle(`${user.displayname} just achieved ${goals.goalsAchieved.length} ${goals.goalsAchieved.length === 1 ? "Goal" : "Goals"} (${goals.playtype})!`)
+        .setTitle(`${user.displayname} just achieved ${classData.toHuman} (${classData.playtype})!`)
         .setAuthor(
             `${user.displayname} (@${user.username})`,
             pfpLink,
             `https://kamaitachi.xyz/dashboard/profiles/${user.id}/games/${goals.game}?playtype=${goals.playtype}`
         )
         .setThumbnail(pfpLink)
-        .addFields(fields)
         .setTimestamp()
 
-    channel.send(goalsEmbed);
+    channel.send(classEmbed);
 }
 
-module.exports = OnAchievedGoal;
+module.exports = OnClassUpdate;
