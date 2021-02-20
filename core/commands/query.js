@@ -9,7 +9,7 @@ async function ScoreQuery(mind, msg, args){
         return;
     }
 
-    let rj = await fetch("http://api.kamaitachi.xyz/v1/scores/query?limit=10&getAssocData=true&" + args.slice(1).join(" "), {
+    let rj = await fetch("http://api.kamaitachi.xyz/v1/scores?limit=10&getAssocData=true&" + args.slice(1).join(" "), {
         headers: {
             Authorization: `Bearer ` + user.integrations["ktchi-api"].key
         }
