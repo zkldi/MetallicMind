@@ -19,8 +19,18 @@ async function GetSongHuman(user, msg, args, opts) {
     let exactMatches = [];
 
     if (opts.game) {
-        songs = rj.body.matches[game];
-        exactMatches = rj.body.exactMatches[game];
+        songs = rj.body.matches[opts.game];
+        exactMatches = rj.body.exactMatches[opts.game];
+
+        if (exactMatches[0]) {
+            exactMatches[0].game = opts.game;
+            return exactMatches[0];
+        }
+    
+        if (songs[0]) {
+            songs[0].game = opts.game;
+            return songs[0];
+        }
     }
     else {
         for (const game in rj.body.matches) {
@@ -28,13 +38,14 @@ async function GetSongHuman(user, msg, args, opts) {
             exactMatches.push(...rj.body.exactMatches[game]);
 
             if (exactMatches[0]) {
+                exactMatches[0].game = game;
                 return exactMatches[0];
             }
         
             if (songs[0]) {
+                songs[0].game = game;
                 return songs[0];
             }
-        
         }
     }
 
