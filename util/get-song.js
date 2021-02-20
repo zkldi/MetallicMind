@@ -4,15 +4,7 @@ async function GetSongHuman(user, msg, args, opts) {
     let rawQuery = encodeURIComponent(args.slice(1).join(" "));
     let query = rawQuery;
 
-    if (opts.game) {
-        query += "&game=" + opts.game;
-    }
-
-    if ("exact" in opts){
-        query += "&exact=true";
-    }
-
-    let rj = await fetch("http://api.kamaitachi.xyz/v1/search?title=" + query, {
+    let rj = await fetch("http://api.kamaitachi.xyz/v1/search/songs?title=" + encodeURIComponent(query), {
         headers: {
             Authorization: `Bearer ` + user.integrations["ktchi-api"].key
         }
@@ -23,11 +15,32 @@ async function GetSongHuman(user, msg, args, opts) {
         return null;
     }
 
-    if (!rj.body[0]){
-        msg.channel.send("No song found.");
+    let songs = [];
+    let exactMatches = [];
+
+    if (opts.game) {
+        songs = rj.body.matches[game];
+        exactMatches = rj.body.exactMatches[game];
+    }
+    else {
+        for (const game in rj.body.matches) {
+            songs.push(...rj.body.matches[game]);
+            exactMatches.push(...rj.body.exactMatches[game]);
+
+            if (exactMatches[0]) {
+                return exactMatches[0];
+            }
+        
+            if (songs[0]) {
+                return songs[0];
+            }
+        
+        }
     }
 
-    return rj.body[0];
+
+    msg.channel.send("No song found.");
+    return null;
 }
 
 module.exports = GetSongHuman;
