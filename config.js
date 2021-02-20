@@ -3,7 +3,7 @@ module.exports = {
         title: "Reckoner",
         major: 1,
         minor: 6,
-        patch: 0,
+        patch: 1,
         suffix: ""
     },
     gameChannels: {
