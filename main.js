@@ -19,27 +19,10 @@ mind.on("ready", () => {
         global.BASE_URL = "http://127.0.0.1:8080";
     }
 
-    HarassNyannurs();
-
     mind.channels.fetch(baseChannel).then(c => {
         c.send(`Deploy successful. Updated to v${config.ver.major}.${config.ver.minor}.${config.ver.patch}${config.ver.suffix} (${config.ver.title})!`);
     })
 });
-
-// temp, and a joke.
-function HarassNyannurs() {
-    let harassNyannursChannel = "814611709557080106";
-
-    setInterval(() => {
-        mind.channels.fetch(harassNyannursChannel).then(c => {
-            c.send(`<@257023444175028234> http://zkldi.xyz/static/nugget.gif`);
-        });
-    }, 1000 * 60 * 60 * 24);
-
-    mind.channels.fetch(harassNyannursChannel).then(c => {
-        c.send(`<@257023444175028234> http://zkldi.xyz/static/nugget.gif`);
-    });
-}
 
 mind.on("message", msg => {
     try {
