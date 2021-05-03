@@ -21,6 +21,7 @@ const COMMANDS = {
     "thank": require("./commands/thank.js"),
     "damnitjag": require("./commands/damnit-jag.js"),
     "lastsession": require("./commands/last-session.js"),
+    "dans": require("./commands/dans.js"),
     "help": {
         desc: "Displays a list of commands, or information about a specific command.",
         args: [
