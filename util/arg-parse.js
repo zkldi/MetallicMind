@@ -1,5 +1,5 @@
 function ParseArgs(args) {
-    let opts = {}
+    let opts = Object.create(null);
 
     for (let i = 0; i < args.length; i++) {
         let arg = args[i];
