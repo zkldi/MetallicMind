@@ -20,6 +20,7 @@ const COMMANDS = {
     "sync": require("./commands/sync.js"),
     "thank": require("./commands/thank.js"),
     "damnitjag": require("./commands/damnit-jag.js"),
+    "fluzzarn": require("./commands/fluzzarn.js"),
     "lastsession": require("./commands/last-session.js"),
     "dans": require("./commands/dans.js"),
     "help": {
